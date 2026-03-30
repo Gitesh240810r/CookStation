@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Finder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            cream: '#F5F0E8',
+            ink:   '#1A1209',
+            muted: '#6B6357',
+            accent: '#2D6A4F',
+            'accent-light': '#40916C',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-cream text-ink font-sans min-h-screen">
+
+  <header class="fixed top-0 left-0 w-full bg-cream shadow-md z-10">
+    <nav class="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
+      <h1 class="font-serif text-2xl font-bold leading-tight tracking-tight">
+        Recipe <span class="text-accent">Finder.</span>
+      </h1>
+      <ul class="flex items-center gap-4 text-sm font-semibold">
+        <li><a href="index.html" class="text-ink hover:text-accent transition-colors">Home</a></li>
+        <li><a href="saved.html" class="text-ink hover:text-accent transition-colors">Saved Recipes</a></li>
+        <li><button id="signInBtn" class="bg-ink text-cream hover:bg-accent px-4 py-1 rounded transition-colors">Sign In</button></li>
+        <div id="whenSignedIn" class="flex items-center gap-4 hidden" >
+          <li><button id="signOutBtn" class="bg-ink text-cream hover:bg-accent px-4 py-1 rounded transition-colors">Sign Out</button></li>
+          <img src="" alt="" class="h-[50px] w-[50px] rounded-full object-cover" id="userPhoto">
+        </div>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="nav-spacer"></div>
+
+  <div class="px-6 pt-8 pb-4 max-w-2xl mx-auto">
+    <div class="flex border border-ink bg-white focus-within:shadow-[4px_4px_0px_#2D6A4F] transition-shadow duration-200">
+      <input
+        type="text"
+        id="search"
+        class="flex-1 bg-transparent outline-none px-5 py-3.5 text-sm font-light text-ink placeholder:text-muted"
+        placeholder="chicken, salmon, garlic…"
+        onkeydown="if(event.key==='Enter') fetchRecipe()"
+      >
+      <button
+        class="border-l border-ink bg-ink text-cream px-7 text-xs font-medium tracking-widest uppercase hover:bg-accent transition-colors duration-200"
+        onclick="fetchRecipe()"
+      >Search</button>
+    </div>
+  </div>
+
+  <!-- Categories -->
+   <section class="py-5 px-6">
+    <h1 class="mb-5 text-xl font-bold text-center">Something on your Mind?</h1>
+      <div id="categories" class="flex gap-3 flex-wrap justify-center mx-auto max-w-4xl"></div>
+  </section>
+
+
+  <!-- Results -->
+  <main class="px-6 pb-20 max-w-7xl mx-auto">
+    <h2 id="heading" class="text-3xl font-bold mt-6 mb-5">Random Popular Recipes</h2>
+    <div
+      id="display"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+    ></div>
+  </main>
+
+  <script>
+    const nav = document.querySelector('header');
+    const spacer = document.getElementById('nav-spacer');
+    const syncSpacer = () => spacer.style.height = nav.offsetHeight + 'px';
+    syncSpacer();
+    window.addEventListener('resize', syncSpacer);
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore-compat.js"></script>
+
+  <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDigj_J-zmqBBGBml8fdzmwVRE2gJornhY",
+        authDomain: "cooks-c2f60.firebaseapp.com",
+        projectId: "cooks-c2f60",
+        storageBucket: "cooks-c2f60.firebasestorage.app",
+        messagingSenderId: "498141398301",
+        appId: "1:498141398301:web:a65a487ac3cc89ab014df4"
+      };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="app.js"></script>
+
+</body>
+</html>

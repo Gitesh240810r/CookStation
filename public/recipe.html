@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: '#F5F0E8',
+                        ink:   '#1A1209',
+                        muted: '#6B6357',
+                        accent: '#2D6A4F',
+                        'accent-light': '#40916C',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-cream text-ink font-sans min-h-screen">
+
+    <main class="max-w-4xl mx-auto px-6 py-8">
+        <div id="recipeContainer"></div>
+    </main>
+
+    <script src="recipe.js"></script>
+</body>
+</html>
